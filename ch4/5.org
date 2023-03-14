@@ -1,0 +1,14 @@
+- What will the following Python program print out?
+  
+  #+BEGIN_SRC python
+    def fred():
+        print("Zap")
+    def jane():
+        print("ABC")
+
+    jane()
+    fred()
+    jane()
+  #+END_SRC
+  
+  d) ABC Zap ABC
