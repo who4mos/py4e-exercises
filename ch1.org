@@ -5,12 +5,12 @@
   - A sequence of ordered instructions, in a programming language, that tells the computer to do something.
 
 - What is the difference between a compiler and an interpreter?
-  Computers only understand 0s and 1s, we humans, most of us, don't know how to talk to the computer in 0s and 1s, so we need to translate code we can understand (like Python) into machine code.
+  - Computers only understand 0s and 1s, we humans, most of us, don't know how to talk to the computer in 0s and 1s, so we need to translate code we can understand (like Python) into machine code.
 
-  These translators can be interpreters or compilers. While an interpreter reads and translates the code one statement at time, on the fly, compilers take an entire program in a file, and then translate the high-level source code into machine code, for later execution.
+    These translators can be interpreters or compilers. While an interpreter reads and translates the code one statement at time, on the fly, compilers take an entire program in a file, and then translate the high-level source code into machine code, for later execution.
 
 - Which of the following contains “machine code”?
-  a) The Python interpreter
+  - a) The Python interpreter
 
 - What is wrong with the following code:
 
@@ -23,13 +23,13 @@
       >>>
   #+END_SRC
 
-  The ~print~ function was misspelled, and is lacking parenthesis
+  - The ~print~ function was misspelled, and is lacking parenthesis
 
 - Where in the computer is a variable such as “x” stored after the following Python line finishes?
 
   : x = 123
 
-  b) Main Memory
+  - b) Main Memory
 
 - What will the following program print out:
 
@@ -37,7 +37,7 @@
   : x = x - 1
   : print(x)
 
-  b) 42
+  - b) 42
 
 - Explain each of the following using an example of a human capability: (1) Central processing unit, (2) Main Memory, (3) Secondary Memory, (4) Input Device, and (5) Output Device. For example, “What is the human equivalent to a Central Processing Unit”?
 
@@ -50,8 +50,8 @@
   4. Eyes, ears (get data).
 
   5. Mouth (output data).
-
+     
 - How do you fix a “Syntax Error”?
-  A syntax error means that is something wrong with the syntax, the grammar of your code. Sometimes python notice the error a bit later, so you have to investigate.
+  - A syntax error means that is something wrong with the syntax, the grammar of your code. Sometimes python notice the error a bit later, so you have to investigate.
 
 
