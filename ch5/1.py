@@ -18,4 +18,4 @@ while True:
 
 print(f"You've entered {count} numbers")
 print(f"The sum of these numbers is {total}")
-print(f"And their average is {total/count}")
+print(f"And their average is {total/count if count > 0 else 0}")
