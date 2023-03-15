@@ -1,0 +1,2 @@
+* Python for Everybody Exercises
+Exercises of the book Python for Everybody, you can [[https://www.py4e.com/book][download the book]] or go to the [[https://www.py4e.com/][homepage]] of the course.
