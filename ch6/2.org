@@ -1,2 +1,2 @@
-- Given that fruit is a string, what does fruit[:] mean?
+- Given that =fruit= is a string, what does ~fruit[:]~ mean?
   - A shallow copy of the string.
