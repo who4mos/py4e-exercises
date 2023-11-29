@@ -1,0 +1,75 @@
+* What is the function of the secondary memory in a computer?
+
+- [ ] Execute all of the computation and logic of the program
+- [ ] Retrieve web pages over the Internet
+- [X] Store information for the long term, even beyond a power cycle
+- [ ] Take input from the user
+
+* What is a program?
+
+A program is a sequence of instructions with the goal of do something.
+
+* What is the difference between a compiler and an interpreter?
+
+An interpreter and a compiler are both programs. An interpreter reads your source code line by line and evaluates each line in real time. A compiler translates your entire source code (human friendly langugae) to machine langugage (computer friendly langugage), and generates a executable program.
+
+* Which of the following contains "machine code"?
+
+- [X] The Python interpreter
+- [ ] The keyboard
+- [ ] Python source file
+- [ ] A word processing document
+
+* What is wrong with the following code:
+
+#+begin_src python
+  primt 'Hello world!'
+#+end_src
+
+~primt~ is not a python keyword, so the interpreter will give a syntax error.
+
+* Where in the computer is a variable such as "x" stored after the following Python line finishes?
+
+#+begin_src python
+  x = 123
+#+end_src
+
+- [ ] Central processing unit
+- [X] Main Memory
+- [ ] Secondary Memory
+- [ ] Input Devices
+- [ ] Output Devices
+
+* What will the following program print out:
+
+#+begin_src python
+  x = 43
+  x = x - 1
+  print(x)
+#+end_src
+
+- [ ] 43
+- [X] 42
+- [ ] x + 1
+- [ ] Error because x = x + 1 is not possiblemathematically.
+
+* Explain each of the following using an example of a human capability.
+
+1) Central Processing unit
+   The Central Processing unit is someone who can do simple math and logic but very very fast, it keeps asking what calculation to do.
+
+2) Main Memory
+   The main memory is also someone who can do math and logic very fast, but that person's memory is deleted after sleeping. This person is usefull for delivering information that the CPU needs.
+
+3) Secondary Memory
+   The secondary memory is like someone with a very large, but not fast, memory. This person's memory stay there even after a sleep.
+   
+4) Input Device
+   This is someone who brings some type of data to the CPU work with.
+   
+5) Output Device
+   This is someone who spreds the finished work of the CPU.
+
+* How do you fix a "Syntax Error"?
+
+A syntax error means that you've violated python's grammar rules. You can fix the error by reading the error message, locating the error and writing correctly.
