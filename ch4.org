@@ -1,0 +1,123 @@
+* Run the program on your system and see what numbers you get. Run the program more than once and see what numbers you get.
+
+#+begin_src python
+  import random
+
+  for i in range(10):
+      x = random.random()
+      print(x)
+#+end_src
+
+The program outputs different numbers on each execution.
+
+* Move the last line of this program to the top, so the function call appears before the definitions. Run the program and see what error message you get.
+
+#+begin_src python
+  repeat_lyrics()
+
+  def print_lyrics():
+      print("I'm a lumberjack, and I'm okay.")
+      print('I sleep all night and I work all day.')
+
+  def repeat_lyrics():
+      print_lyrics()
+      print_lyrics()
+#+end_src
+
+: NameError: name 'repeat_lyrics' is not defined
+
+* Move the function call back to the bottom and move the definition of ~print_lyrics~ after the definition of ~repeat_lyrics~. What happens when you run this program?
+
+#+begin_src python
+  def repeat_lyrics():
+      print_lyrics()
+      print_lyrics()
+
+  def print_lyrics():
+      print("I'm a lumberjack, and I'm okay.")
+      print('I sleep all night and I work all day.')
+
+  repeat_lyrics()
+#+end_src
+
+It executes without errors.
+
+* What is the purpose of the “def” keyword in Python?
+
+1) [ ] It is slang that means “the following code is really cool”
+2) [ ] It indicates the start of a function
+3) [ ] It indicates that the following indented section of code is to be stored for later
+4) [X] 2 and 3 are both true
+5) [ ] None of the above
+
+* What will the following Python program print out?
+
+#+begin_src python
+  def fred():
+      print("Zap")
+  def jane():
+      print("ABC")
+
+  jane()
+  fred()
+  jane()
+#+end_src
+
+- [ ] Zap ABC jane fred jane
+- [ ] Zap ABC Zap
+- [ ] ABC Zap jane
+- [X] ABC Zap ABC
+- [ ] Zap Zap Zap
+
+* Rewrite your pay computation with time-and-a-half for over-time and create a function called computepay which takes two parameters (hours and rate).
+
+#+begin_src python
+  def computepay(hours, rate):
+      if hours > 40:
+	  pay = 40 * rate + (hours - 40) * 1.5 * rate
+      else:
+	  pay = hours * rate
+
+      return pay
+
+  try:
+      hours = int(input("Hours: "))
+      rate = float(input("Rate: "))
+  except:
+      print("Please, enter a numeric value.")
+      exit()
+
+  print(f"Pay: {computepay(hours, rate)}")
+#+end_src
+
+* Rewrite the grade program from the previous chapter using a function called ~computegrade~ that takes a score as its parameter and returns a grade as a string.
+
+#+begin_src python
+  def computegrade(score):
+      if score < 0 or score > 1:
+	  print("Bad score")
+	  exit() 
+        
+      if score >= .9:
+	  grade = 'A'
+      elif score >= .8:
+	  grade = 'B'
+      elif score >= .7:
+	  grade = 'C'
+      elif score >= .6:
+	  grade = 'D'
+      else:
+	  grade = 'F'
+
+      return grade
+
+  try:
+      score = float(input("Enter score (0.0-1.0): "))
+  except:
+      print("Bad score")
+      exit()
+
+  grade =  computegrade(score)
+
+  print(f"Grade: {grade}")
+#+end_src
