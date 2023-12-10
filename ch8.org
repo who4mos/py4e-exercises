@@ -33,3 +33,69 @@ Before printing the 3rd element of the ~words~ variable, we should check if ther
 #+begin_src python
   if len(words) < 3 or words[0] != "From": continue
 #+end_src
+
+* Find all unique words in a file
+
+#+begin_src python
+  fname = input("File name: ")
+  uniques = []
+
+  try:
+      fhandle = open(fname)
+  except:
+      print(f"File cannot be opened: {fname}")
+      exit()
+
+  for line in fhandle:
+      words = line.split()
+      for word in words:
+	  if word not in uniques:
+	      uniques.append(word)
+
+  print(sorted(uniques))
+#+end_src
+
+* Minimalist Email Client
+
+#+begin_src python
+  fname = input("File name: ")
+  emails = []
+
+
+  try:
+      fhandle = open(fname)
+  except:
+      print(f"File cannot be opened: {fname}")
+      exit()
+
+
+  for line in fhandle:
+      if line.startswith("From"):
+	  words = line.split()
+	  if len(words) < 2:
+	      print("Invalid Line")
+	  else:
+	      print(words[1])
+	      emails.append(words[1])
+
+  print(f"There were {len(emails)} lines in the file with From \
+  as the first word")
+#+end_src
+
+* Rewrite the program that prompts the user for a list of numbers and prints out the maximum and minimum of the numbers at the end when the user enters “done”. Write the program to store the numbers the user enters in a list and use the max() and min() functions to compute the maximum and minimum numbers after the loop completes.
+
+#+begin_src python
+  answer = ""
+  numbers = []
+
+  while answer.lower() != "done":
+      answer = input("Enter a number: ")
+      try:
+	  num =  float(answer)
+	  numbers.append(num)
+      except:
+	  print("Invalid Input!")
+
+  print(f"Maximum: {max(numbers)}")
+  print(f"Minimum: {min(numbers)}")
+#+end_src
