@@ -1,0 +1,121 @@
+* Write a program that reads the words in words.txt and stores them as keys in a dictionary. It doesn’t matter what the values are. Then you can use the in operator as a fast way to check whether a string is in the dictionary.
+
+#+begin_src python
+  fname = input("Enter a file name: ")
+
+  try:
+      fhand = open(fname)
+  except:
+      print(f"File cannot be opened: {fname}")
+      exit()
+
+  word_dict = dict()
+
+  for line in fhand:
+      words = line.split()
+      for word in words:
+	  word_dict[word] = None
+
+
+  test = ""
+  while test != "exit":
+      if test in word_dict:
+	  print(f"{test} in Dict!")
+
+      test = input("Word: ")
+#+end_src
+
+* Write a program that categorizes each mail message by which day of the week the commit was done. To do this look for lines that start with “From”, then look for the third word and keep a running count of each of the days of the week. At the end of the program print out the contents of your dictionary (order does not matter).
+
+#+begin_src python
+  fname = input("Enter a file name: ")
+
+  try:
+      fhand = open(fname)
+  except:
+      print(f"File cannot be opened: {fname}")
+      exit()
+
+  days_count = dict()
+
+  for line in fhand:
+      words = line.split()
+      if line.startswith("From") and len(words) > 2:
+	  day = words[2]
+	  days_count[day] = days_count.get(day, 0) + 1
+
+  print(days_count)
+#+end_src
+
+* Write a program to read through a mail log, build a histogram using a dictionary to count how many messages have come from each email address, and print the dictionary.
+
+#+begin_src python
+  fname = input("Enter a file name: ")
+
+  try:
+      fhand = open(fname)
+  except:
+      print(f"File cannot be opened: {fname}")
+      exit()
+
+  mails = dict()
+
+  for line in fhand:
+      words = line.split()
+      if line.startswith("From") and len(words) > 2:
+	  print(line)
+	  mail = words[1]
+	  mails[mail] = mails.get(mail,0) + 1
+
+  print(mails)
+#+end_src
+
+* Add code to the above program to figure out who has the most messages in the file. After all the data has been read and the dictionary has been created, look through the dictionary using a maximum loop (see Chapter 5: Maximum and minimum loops) to find who has the most messages and print how many messages the person has.
+
+#+begin_src python
+  fname = input("Enter a file name: ")
+
+  try:
+      fhand = open(fname)
+  except:
+      print(f"File cannot be opened: {fname}")
+      exit()
+
+  mails = dict()
+
+  for line in fhand:
+      words = line.split()
+      if line.startswith("From") and len(words) > 2:
+	  print(line)
+	  mail = words[1]
+	  mails[mail] = mails.get(mail,0) + 1
+
+  most = None
+  for item in mails:
+      if most is None or mails[item] > mails[most]:
+	  big = item
+
+  print(big, mails[big])
+#+end_src
+
+* This program records the domain name (instead of the address) where the message was sent from instead of who the mail came from (i.e., the whole email address). At the end of the program, print out the contents of your dictionary.
+
+#+begin_src python
+  fname = input("Enter a file name: ")
+
+  try:
+      fhand = open(fname)
+  except:
+      print(f"File cannot be opened: {fname}")
+      exit()
+
+  domains = dict()
+
+  for line in fhand:
+      words = line.split()
+      if line.startswith("From") and len(words) > 2:
+	  domain = words[1].split('@')[1]
+	  domains[domain] = domains.get(domain, 0) + 1
+
+  print(domains)
+#+end_src
