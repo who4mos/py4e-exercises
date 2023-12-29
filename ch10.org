@@ -1,0 +1,75 @@
+* Revise a previous program as follows: Read and parse the “From” lines and pull out the addresses from the line. Count the number of messages from each person using a dictionary. After all the data has been read, print the person with the most commits by creating a list of (count, email) tuples from the dictionary. Then sort the list in reverse order and print out the person who has the most commits.
+
+#+begin_src python
+  fname = input("Enter a file: ")
+
+  try:
+      fhandle = open(fname)
+  except:
+      print(f"File could not be opened: {fname}")
+      exit()
+
+  counts = dict()
+
+  for line in fhandle:
+      words = line.split()
+      if line.startswith("From") and len(words) > 2:
+	  email =  words[1]
+	  counts[email] = counts.get(email, 0) + 1
+
+  l = [(count, email) for email, count in counts.items()]
+  l.sort(reverse=True)
+
+  print(f"{l[0][1]} {l[0][0]}")
+#+end_src
+
+* This program counts the distribution of the hour of the day for each of the messages. You can pull the hour from the “From” line by finding the time string and then splitting that string into parts using the colon character. Once you have accumulated the counts for each hour, print out the counts, one per line, sorted by hour as shown below.
+
+#+begin_src python
+  fname = input("Enter a file name: ")
+
+  try:
+      fhandle = open(fname)
+  except:
+      print(f"File could not be opened {fname}")
+      exit()
+
+  counts = dict()
+
+  for line in fhandle:
+      words = line.split()
+      if line.startswith("From") and len(words) > 2:
+	  timestamp = words[5]
+	  hour = timestamp.split(':')[0]
+	  counts[hour] = counts.get(hour, 0) + 1
+
+  for hour, count in sorted(counts.items()):
+      print(f"{hour} {count}")
+#+end_src
+
+* Write a program that reads a file and prints the letters in decreasing order of frequency. Your program should convert all the input to lower case and only count the letters a-z. Your program should not count spaces, digits, punctuation, or anything other than the letters a-z.
+
+#+begin_src python
+  fname = input("Enter a file name: ")
+
+  try:
+      fhandle = open(fname)
+  except:
+      print(f"File could not be opened {fname}")
+      exit()
+
+  counts = dict()
+
+  for line in fhandle:
+      line = line.lower()
+      for letter in line:
+	  if 'a' <= letter <= 'z':
+	      counts[letter] = counts.get(letter, 0) + 1
+
+  letters = [(count, letter) for letter, count in counts.items()]
+  letters.sort(reverse=True)
+
+  for count, letter in letters:
+      print(f"{letter}: {count}")
+#+end_src
+
