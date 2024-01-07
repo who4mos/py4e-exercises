@@ -1,0 +1,175 @@
+* Change the socket program socket1.py to prompt the user for the URL so it can read any web page. You can use split('/') to break the URL into its component parts so you can extract the host name for the socket connect call. Add error checking using try and except to handle the condition where the user enters an improperly formatted or non-existent URL.
+
+#+begin_src python
+  import socket
+  import re
+
+  URL = input("URL: ")
+  PORT = 80
+
+  words = URL.split('/')
+
+  try:
+      if re.search(r"http[s]?", words[0]):
+	  # ["http[s]?", "", "host", ...]
+	  host = words[2]
+      else:
+	  # ["host", ...]
+	  host = words[0]
+  except:
+      print("Invalid URL.")
+      exit()
+
+  try:
+      s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+      s.connect((host, PORT))
+  except:
+      print(f"Could not open {host}.")
+      exit()
+
+  cmd = f"GET {URL} HTTP/1.0\r\n\r\n".encode()
+  s.sendall(cmd)
+
+  while True:
+      data = s.recv(512)
+      if not len(data):
+	  break
+
+      print(data.decode(), end='')
+
+  s.close()
+#+end_src
+
+*  Change your socket program so that it counts the number of characters it has received and stops displaying any text after it has shown 3000 characters. The program should retrieve the entire document and count the total number of characters and display the count of the number of characters at the end of the document.
+
+#+begin_src python
+  import socket
+  import re
+
+  URL = input("URL: ")
+  PORT = 80
+
+  words = URL.split('/')
+
+  try:
+      if re.search(r"http[s]?", words[0]):
+	  # ["http[s]?", "", "host", ...]
+	  host = words[2]
+      else:
+	  # ["host", ...]
+	  host = words[0]
+  except:
+      print("Invalid URL.")
+      exit()
+
+  try:
+      s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+      s.connect((host, PORT))
+  except:
+      print(f"Could not open {host}.")
+      exit()
+
+  cmd = f"GET {URL} HTTP/1.0\r\n\r\n".encode()
+  s.sendall(cmd)
+
+  count = 0
+
+  while count < 3000:
+      data = s.recv(1000)
+
+      if not len(data):
+	  break
+    
+      count += len(data)
+      print(data.decode(), end='')
+
+  print(f"\n{count} characters received.")
+  s.close()
+#+end_src
+
+* Use urllib to replicate the previous exercise of (1) retrieving the document from a URL, (2) displaying up to 3000 characters, and (3) counting the overall number of characters in the document. Don’t worry about the headers for this exercise, simply show the first 3000 characters of the document contents.
+
+#+begin_src python
+  from urllib.request import urlopen
+
+  URL = input("URL: ")
+
+  try:
+      fhandle = urlopen(URL)
+  except:
+      print("Invalid URL.")
+      exit()
+
+  html = fhandle.read(3000).decode()
+
+  print(html)
+  print(f"{len(html)} characters.")
+#+end_src
+
+* Change the urllinks.py program to extract and count paragraph (p) tags from the retrieved HTML document and display the count of the paragraphs as the output of your program. Do not display the paragraph text, only count them. Test your program on several small web pages as well as some larger web pages.
+
+#+begin_src python
+  from bs4 import BeautifulSoup
+  from urllib.request import urlopen
+
+  url = input("URL: ")
+
+  try:
+      html = urlopen(url)
+  except:
+      print("Invalid URL.")
+      exit()
+
+  soup = BeautifulSoup(html, "html.parser")
+
+  p_count = len(soup.findAll('p'))
+
+  print(f"{p_count} paragraphs found!")  
+#+end_src
+
+* (Advanced) Change the socket program so that it only shows data after the headers and a blank line have been received. Remember that recv receives characters (newlines and all), not lines.
+
+#+begin_src python
+import socket
+import re
+
+URL = input("URL: ")
+PORT = 80
+
+words = URL.split('/')
+
+try:
+    if re.search(r"http[s]?", words[0]):
+        # words = ["http[s]?", "", "host", "..."]
+        HOST = words[2]
+    else:
+        # words = ["host", ...]
+        HOST = words[0]
+except:
+    print("Invalid URL.")
+    exit()
+
+try:
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((HOST, PORT))
+except:
+    print(f"Could not connect to {host}")
+    exit()
+    
+cmd = f"GET {URL} HTTP/1.0\r\n\r\n".encode()
+s.sendall(cmd)
+
+while True:
+    data = s.recv(512).decode()
+
+    if not len(data):
+        break
+    
+    header_end = re.search("\r\n\r\n", data)
+    
+    if header_end:
+        pos = header_end.end()
+        print(data[pos:])
+    else:
+        print(data)
+#+end_src
