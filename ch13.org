@@ -1,0 +1,57 @@
+* Change either geojson.py or geoxml.py to print out the two character country code from the retrieved data. Add error checking so your program does not traceback if the country code is not there. Once you have it working, search for “Atlantic Ocean” and make sure it can handle locations that are not in any country.
+
+#+begin_src python
+  from urllib.request import urlopen
+  from urllib.parse import urlencode
+  import json
+  import ssl
+  from pprint import pprint
+
+  key = False
+
+  if key is False:
+      key = 42
+      serviceurl = "http://py4e-data.dr-chuck.net/json?"
+  else:
+      serviceurl = "https://maps.googleapis.com/maps/api/geocode/json?"
+
+  # ignore ssl errors
+  ctx = ssl.create_default_context()
+  ctx.check_hostname = False
+  ctx.verify_mode = ssl.CERT_NONE
+
+  while True:
+      address = input("Location: ")
+
+      if not len(address):
+	  break
+
+      params = dict()
+      params["address"] = address
+      params["key"] = key
+      url = serviceurl + urlencode(params)
+
+      print(f"Retrieving {url}")
+      fhandle = urlopen(url, context=ctx)
+      data = fhandle.read().decode()
+      print(f"Retrieved {len(data)} characters.")
+    
+      try:
+	  js = json.loads(data)
+      except:
+	  js = None
+
+
+      if not js or js.get("status", None) !=  "OK":
+	  print("=== Failure To Retrieve ===")
+	  print(data)
+	  continue
+
+      comps = js["results"][0]["address_components"]
+
+      if len(comps) > 1:
+	  print(f"Country: {comps[-1]["short_name"]}")
+      else:
+	  print("No Country!")
+#+end_src
+
